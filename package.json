@@ -1,0 +1,29 @@
+{
+  "name": "wakeflow-logger",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "wakeflow's logger used to send logs to GCP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wakeflow/wakeflow-logger.git"
+  },
+  "keywords": [
+    "logging",
+    "logger",
+    "GCP",
+    "wakeflow"
+  ],
+  "author": "Andreas Kater",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wakeflow/wakeflow-logger/issues"
+  },
+  "homepage": "https://github.com/wakeflow/wakeflow-logger#readme",
+  "dependencies": {
+    "@google-cloud/logging": "^9.6.4"
+  }
+}
