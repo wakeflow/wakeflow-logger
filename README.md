@@ -13,9 +13,12 @@ import { Logger } from 'wakeflow-logger'
 
 const logger = new Logger({projectId:'example-project-id'})
 
-logger.info('this is info',{payload:"this is a json payload"})
-logger.warn('this is a warning',{payload:"this is a json payload"})
-logger.error('this is an error',{payload:"this is a json payload"})
+logger.info('this is info')
+logger.warn('this is a warning')
+logger.error('this is an error')
+
+logger.info('you can also add a json payload',{payload:"this is a json payload"})
+logger.info({payload:"or send only a json payload"})
 ```
 ## Development mode
 

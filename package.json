@@ -1,6 +1,6 @@
 {
   "name": "wakeflow-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "wakeflow's logger used to send logs to GCP",
   "main": "index.js",
