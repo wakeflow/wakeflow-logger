@@ -24,22 +24,23 @@ export class Logger {
   }
 }
 
-const prepPayload = (message,data)=>{
+const prepPayload = (message,data) => {
   let payload = {}
-  if(typeof message === 'string') payload.message = message
-  if(isObject(message)) payload = {...payload,...message}
-  if(isObject(data)) payload = {...payload,...data}
+  if(typeof message === `string`) payload.message = message
+  if(isObject(message)) payload = { ...payload,...message }
+  if(isObject(data)) payload = { ...payload,...data }
   return payload
 }
 
 const local = (message,data) => {
   // if(typeof message === `object`) console.log(JSON.stringify(message,null,2))
   // else console.log(message)
-  console.log(message,data)
+  if(data) console.log(message,data)
+  else console.log(message)
 }
 
 const isObject = thing => {
-  return typeof thing === 'object' &&
+  return typeof thing === `object` &&
   !Array.isArray(thing) &&
   thing !== null
 }

@@ -1,6 +1,6 @@
 {
   "name": "wakeflow-logger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "description": "wakeflow's logger used to send logs to GCP",
   "main": "index.js",
@@ -25,5 +25,8 @@
   "homepage": "https://github.com/wakeflow/wakeflow-logger#readme",
   "dependencies": {
     "@google-cloud/logging": "^9.6.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0"
   }
 }
