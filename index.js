@@ -1,8 +1,6 @@
 import { Logging } from '@google-cloud/logging'
 
 const logName = `wakeflow`
-const logging = new Logging({ projectId })
-const log = logging.log(logName)
 const metadata = { labels: { wakeflow: `wakeflow` } }
 
 export class Logger {
@@ -12,22 +10,36 @@ export class Logger {
     this.log = this.logging.log(logName)
   }
 
-  async info(message){
-    if(process.env.NODE_ENV !== `production`) return local(message)
-    await log.write(log.entry({ ...metadata,severity: `INFO` },message))
+  async info(message,data){
+    if(process.env.NODE_ENV !== `production`) return local(message,data)
+    await log.write(log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)))
   }
   async warn(message){
     if(process.env.NODE_ENV !== `production`) return local(message)
-    await log.write(log.entry({ ...metadata,severity: `WARNING` },message))
+    await log.write(log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)))
   }
   async error(message){
     if(process.env.NODE_ENV !== `production`) return local(message)
-    await log.write(log.entry({ ...metadata,severity: `ERROR` },message))
+    await log.write(log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)))
   }
 }
 
-const local = message => {
+const prepPayload = (message,data)=>{
+  let payload = {}
+  if(typeof message === 'string') payload.message = message
+  if(isObject(message)) payload = {...payload,...message}
+  if(isObject(data)) payload = {...payload,...data}
+  return payload
+}
+
+const local = (message,data) => {
   // if(typeof message === `object`) console.log(JSON.stringify(message,null,2))
   // else console.log(message)
-  console.log(message)
+  console.log(message,data)
+}
+
+const isObject = thing => {
+  return typeof thing === 'object' &&
+  !Array.isArray(thing) &&
+  thing !== null
 }
