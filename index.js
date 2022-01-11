@@ -12,15 +12,15 @@ export class Logger {
 
   async info(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
-    await log.write(log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)))
+    await this.log.write(log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)))
   }
   async warn(message){
     if(process.env.NODE_ENV !== `production`) return local(message)
-    await log.write(log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)))
+    await this.log.write(log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)))
   }
   async error(message){
     if(process.env.NODE_ENV !== `production`) return local(message)
-    await log.write(log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)))
+    await this.log.write(log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)))
   }
 }
 
