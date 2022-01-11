@@ -16,13 +16,13 @@ export class Logger {
       this.log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
     )
   }
-  async warn(message){
+  async warn(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message)
     await this.log.write(
       this.log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)),
     )
   }
-  async error(message){
+  async error(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message)
     await this.log.write(
       this.log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)),
