@@ -4,9 +4,8 @@ const logName = `wakeflow`
 const metadata = { labels: { wakeflow: `wakeflow` } }
 
 export class Logger {
-  constructor({ projectId }){
-    this.projectId = projectId
-    this.logging = new Logging({ projectId })
+  constructor(){
+    this.logging = new Logging()
     this.log = this.logging.log(logName)
   }
 
