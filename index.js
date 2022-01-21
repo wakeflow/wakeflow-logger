@@ -16,13 +16,13 @@ export class Logger {
     )
   }
   async warn(message,data){
-    if(process.env.NODE_ENV !== `production`) return local(message)
+    if(process.env.NODE_ENV !== `production`) return local(message,data)
     await this.log.write(
       this.log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)),
     )
   }
   async error(message,data){
-    if(process.env.NODE_ENV !== `production`) return local(message)
+    if(process.env.NODE_ENV !== `production`) return local(message,data)
     await this.log.write(
       this.log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)),
     )
@@ -31,6 +31,7 @@ export class Logger {
 
 const prepPayload = (message,data) => {
   let payload = {}
+  if(message instanceof Error) return message 
   if(typeof message === `string`) payload.message = message
   if(isObject(message)) payload = { ...payload,...message }
   if(isObject(data)) payload = { ...payload,...data }
@@ -40,8 +41,7 @@ const prepPayload = (message,data) => {
 const local = (message,data) => {
   // if(typeof message === `object`) console.log(JSON.stringify(message,null,2))
   // else console.log(message)
-  if(data) console.log(message,data)
-  else console.log(message)
+  console.log(prepPayload(message,data))
 }
 
 const isObject = thing => {

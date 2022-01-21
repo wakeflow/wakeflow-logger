@@ -11,11 +11,18 @@ npm i wakeflow-logger
 ```
 import { Logger } from 'wakeflow-logger'
 
-const logger = new Logger({projectId:'example-project-id'})
+const logger = new Logger()
 
 logger.info('this is info')
 logger.warn('this is a warning')
 logger.error('this is an error')
+logger.error(new Error('hello error'))
+
+try{
+  something()
+}catch(err){
+  logger.error(err)
+}
 
 logger.info('you can also add a json payload',{payload:"this is a json payload"})
 logger.info({payload:"or send only a json payload"})
