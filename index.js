@@ -31,7 +31,20 @@ export class Logger {
 
 const prepPayload = (message,data) => {
   let payload = {}
-  if(message instanceof Error) return message 
+  if(data instanceof Error){
+    payload.message = message || data.message;
+    `status,code,statusCode,stack,response`.split(`,`).forEach(key => {
+      if(data[key]) payload[key] = data[key]
+    })
+    return payload
+  } 
+  if(message instanceof Error){
+    payload.message = message.message;
+    `status,code,statusCode,stack,response`.split(`,`).forEach(key => {
+      if(message[key]) payload[key] = message[key]
+    })
+    return payload
+  } 
   if(typeof message === `string`) payload.message = message
   if(isObject(message)) payload = { ...payload,...message }
   if(isObject(data)) payload = { ...payload,...data }
@@ -41,7 +54,8 @@ const prepPayload = (message,data) => {
 const local = (message,data) => {
   // if(typeof message === `object`) console.log(JSON.stringify(message,null,2))
   // else console.log(message)
-  console.log(prepPayload(message,data))
+  if(data) console.log(message,data)
+  console.log(message)
 }
 
 const isObject = thing => {
