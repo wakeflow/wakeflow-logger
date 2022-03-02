@@ -9,6 +9,12 @@ export class Logger {
     this.log = this.logging.log(logName)
   }
 
+  async log(message,data){
+    if(process.env.NODE_ENV !== `production`) return local(message,data)
+    await this.log.write(
+      this.log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
+    )
+  }
   async info(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
     await this.log.write(
@@ -46,8 +52,8 @@ const prepPayload = (message,data) => {
     return payload
   } 
   if(typeof message === `string`) payload.message = message
-  if(isObject(message)) payload = { ...payload,...message }
   if(isObject(data)) payload = { ...payload,...data }
+  if(isObject(message)) payload = { ...payload,...message }
   return payload
 }
 
