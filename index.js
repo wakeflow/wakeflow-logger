@@ -6,31 +6,31 @@ const metadata = { labels: { wakeflow: `wakeflow` } }
 export class Logger {
   constructor(){
     this.logging = new Logging()
-    this.log = this.logging.log(logName)
+    this.logs = this.logging.log(logName)
   }
 
   async log(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
-    await this.log.write(
-      this.log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
+    await this.logs.write(
+      this.logs.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
     )
   }
   async info(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
-    await this.log.write(
-      this.log.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
+    await this.logs.write(
+      this.logs.entry({ ...metadata,severity: `INFO` },prepPayload(message,data)),
     )
   }
   async warn(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
-    await this.log.write(
-      this.log.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)),
+    await this.logs.write(
+      this.logs.entry({ ...metadata,severity: `WARNING` },prepPayload(message,data)),
     )
   }
   async error(message,data){
     if(process.env.NODE_ENV !== `production`) return local(message,data)
-    await this.log.write(
-      this.log.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)),
+    await this.logs.write(
+      this.logs.entry({ ...metadata,severity: `ERROR` },prepPayload(message,data)),
     )
   }
 }
