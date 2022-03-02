@@ -43,7 +43,7 @@ Make sure you're looking at the correct GCP project.
 
 
 ---
-![Wakeflow Logo](https://wakeflow.io/wakeflowlogo.png)
+![Wakeflow Logo](https://wakeflow.io/wakeflowlogo-white.png)
 
 👨‍💻 Visit us on [www.wakeflow.io](https://wakeflow.io) 
 
