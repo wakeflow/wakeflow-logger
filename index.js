@@ -6,7 +6,7 @@ const metadata = { labels: { wakeflow: `wakeflow` } }
 export class Logger {
   constructor(){
     this.logging = new Logging()
-    this.logs = this.logging.log(logName)
+    this.logs = this.logging.log(logName,{ removeCircular: true })
   }
 
   async log(message,data){
